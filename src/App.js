@@ -9,12 +9,10 @@ function App() {
 
   const searchLocation = (event) => {
     if (event.key === "Enter") {
-      axios
-        .get(url)
-        .then((response) => {
-          setData(response.data);
-          console.log(response.data);
-        });
+      axios.get(url).then((response) => {
+        setData(response.data);
+        console.log(response.data);
+      });
       setLocation("");
     }
   };
@@ -33,6 +31,12 @@ function App() {
       <div className="container">
         <div className="top-holder">
           <div className="top">
+            {!data.name && (
+              <div class="welcome">
+                <h1>☃ Welcome to Weather App 🌞</h1>
+                <p>Weather report at you fingertips!!!</p>
+              </div>
+            )}
             <div className="location">
               <p>{data.name}</p>
             </div>
@@ -43,9 +47,11 @@ function App() {
               {data.weather ? <p>{data.weather[0].main}</p> : null}
             </div>
           </div>
-          <div className="weather-image">
-          {data.name !== undefined && <img src={data.weather[0].icon} alt="Weather" />}
-          </div>
+          {data.name !== undefined && (<div className="weather-image">
+            
+              <img src={data.weather[0].icon} alt="Weather" />
+            
+          </div>)}
         </div>
 
         {data.name !== undefined && (

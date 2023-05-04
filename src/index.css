@@ -107,3 +107,13 @@ h1 {
 .bold {
   font-weight: 700;
 }
+.welcome h1{
+  text-align: center;
+  font-size: 3rem;
+  
+}
+.welcome p{
+  text-align: center;
+  padding-top: 1rem;
+  color: #ccc;
+}
