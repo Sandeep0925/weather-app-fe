@@ -4,14 +4,20 @@ import axios from "axios";
 function App() {
   const [data, setData] = useState({});
   const [location, setLocation] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const url = `https://theta-topic-385706.uc.r.appspot.com/weather/${location}`;
 
   const searchLocation = (event) => {
     if (event.key === "Enter") {
+      setLoading(true);
       axios.get(url).then((response) => {
         setData(response.data);
-        console.log(response.data);
+        setLoading(false);
+        setError(false);
+      }).catch(e=>{
+        setError(true);
       });
       setLocation("");
     }
@@ -28,13 +34,15 @@ function App() {
           type="text"
         />
       </div>
+      {error && <div className="error">Oops! We couldn't find the city you entered.</div>}
       <div className="container">
         <div className="top-holder">
           <div className="top">
             {!data.name && (
               <div class="welcome">
-                <h1>☃ Welcome to Weather App 🌞</h1>
-                <p>Weather report at you fingertips!!!</p>
+                {!loading && !error && <h1>☃ Welcome to Weather App 🌞</h1>}
+                {loading && !error && <h1>Fetching data...</h1>}
+                {!error && <p>Weather report at you fingertips!!!</p>}
               </div>
             )}
             <div className="location">
@@ -47,11 +55,11 @@ function App() {
               {data.weather ? <p>{data.weather[0].main}</p> : null}
             </div>
           </div>
-          {data.name !== undefined && (<div className="weather-image">
-            
+          {data.name !== undefined && (
+            <div className="weather-image">
               <img src={data.weather[0].icon} alt="Weather" />
-            
-          </div>)}
+            </div>
+          )}
         </div>
 
         {data.name !== undefined && (

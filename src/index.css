@@ -83,6 +83,12 @@ h1 {
   flex-direction: row;
   align-items: center;
 }
+.error{
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+  padding-top: 1rem;
+}
 .top-holder .weather-image {
   height: 5rem;
   width: 5rem;
