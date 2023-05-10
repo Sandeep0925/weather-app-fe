@@ -42,7 +42,7 @@ function App() {
               <div class="welcome">
                 {!loading && !error && <h1>☃ Welcome to Weather App 🌞</h1>}
                 {loading && !error && <h1>Fetching data...</h1>}
-                {!error && <p>Weather report at you fingertips!!!</p>}
+                {!error && <p>Weather report at your fingertips!!!</p>}
               </div>
             )}
             <div className="location">
